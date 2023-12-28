@@ -1,4 +1,4 @@
 security:
   jwt:
-    secret-key: 00ec063b5c62fe2b9b339fc2d372e28698a8f7f6e19f594647de7d9b312eb725
+    secret-key: c1a06bb1ffbb1e66ed880ea63e3fe2f445eda066ed44a6760c63ff29d847d195b65d4fdc07157d84daaa7330523c3281ea523ebb488c64a13eb20058318b7e56
     expiration-time: 1800000
