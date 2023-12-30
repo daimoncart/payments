@@ -5,5 +5,30 @@ security:
 
 spring:
   mail:
-    host: sandbox.smtp.mailtrap.io
-    port: 465
+    host: smtp.gmail.com
+    port: 587
+    username:
+    password:
+    verify:
+      host: http://localhost:${server.port}
+    default-encoding: UTF-8
+    properties:
+      mail:
+        mime:
+          charset: UTF
+        smtp:
+          writetimeout: 10000
+          connectiontimeout: 10000
+          timeout: 10000
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+#    host: sandbox.smtp.mailtrap.io
+#    port: 465
+#    username: cf177cf4e2b4f8
+#    password: e865b81122ed93
+
+server:
+  port: 8080

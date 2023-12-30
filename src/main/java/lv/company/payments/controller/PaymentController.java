@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lv.company.payments.config.EmailConfig;
 import lv.company.payments.model.Beneficiary;
 import lv.company.payments.model.Payment;
+import lv.company.payments.service.EmailService;
 import lv.company.payments.util.JwtUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ public class PaymentController {
 
     private JwtUtil util;
     private EmailConfig emailConfig;
+    private EmailService emailService;
 
     @PostMapping("/payments")
     @Operation(summary = "Send Payment", description = "Sends payment info to the authenticated user's email")
@@ -33,24 +35,7 @@ public class PaymentController {
 //            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or expired token");
 //        }
 
-        // Create en email sender
-        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost(emailConfig.getHost());
-        mailSender.setPort(emailConfig.getPort());
-        mailSender.setUsername(emailConfig.getUsername());
-        mailSender.setPassword(emailConfig.getPassword());
-
-        // Create a mail instance
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("m2@m2.com");
-        message.setSubject("This is the subject");
-        message.setReplyTo("m2@m2.com");
-        message.setText("Abundance is abundance");
-        message.setTo("to@example.com");
-
-        // Send mail
-        mailSender.send(message);
-
+        emailService.sendSimpleEmailMessage("imb_lial@yahoo.com", null);
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
