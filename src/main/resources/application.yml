@@ -25,10 +25,5 @@ spring:
             enable: true
             required: true
 
-#    host: sandbox.smtp.mailtrap.io
-#    port: 465
-#    username: cf177cf4e2b4f8
-#    password: e865b81122ed93
-
 server:
   port: 8080
