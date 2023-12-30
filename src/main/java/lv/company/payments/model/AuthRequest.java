@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Schema(description = "Credentials of the login user")
-public record LoginRequest(
+public record AuthRequest(
         @Email(message = "Email format is not valid")
         @NotBlank(message = "Email address can not be empty")
         @Schema(description = "Email address used for login and sending payment info",

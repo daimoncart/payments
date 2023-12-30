@@ -42,6 +42,7 @@ public class SwaggerConfig {
         return GroupedOpenApi.builder()
                 .group("Secured")
                 .pathsToExclude("/login/**")
+                .pathsToMatch("/payments/**")
                 .build();
     }
 }

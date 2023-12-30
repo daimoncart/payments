@@ -1,4 +1,9 @@
 security:
   jwt:
-    secret-key: c1a06bb1ffbb1e66ed880ea63e3fe2f445eda066ed44a6760c63ff29d847d195b65d4fdc07157d84daaa7330523c3281ea523ebb488c64a13eb20058318b7e56
+    secret-key: 45290e0801c91ddf3bbd5e6faac5c873fcabaa8bd8f1abd5219534d6dc91fa1c
     expiration-time: 1800000
+
+spring:
+  mail:
+    host: sandbox.smtp.mailtrap.io
+    port: 465

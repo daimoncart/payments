@@ -1,5 +1,6 @@
 package lv.company.payments.util;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,11 +29,11 @@ public class JwtUtil {
                 .setSubject(username)
                 .setIssuedAt(now)
                 .setExpiration(exp)
-                .signWith(SignatureAlgorithm.HS512, secretKey)
+                .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
 
-    public String extractUsername(String token) {
+    private Claims extractClaims(String token) {
 
         var secreKeyObject = getSecretKey();
 
@@ -40,17 +41,24 @@ public class JwtUtil {
                 .verifyWith(secreKeyObject)
                 .build()
                 .parseSignedClaims(token)
-                .getBody()
-                .getSubject();
+                .getBody();
+    }
+
+    public String extractUsername(String token) {
+        return extractClaims(token).getSubject();
+    }
+
+    public boolean isTokenExpired(String token) {
+        Date expiration = extractClaims(token).getExpiration();
+        return expiration.before(new Date());
     }
 
     public SecretKey getSecretKey() {
         byte[] keyBytes = secretKey.getBytes(StandardCharsets.UTF_8);
-        return new SecretKeySpec(keyBytes, 0, keyBytes.length, "HS512");
+        return new SecretKeySpec(keyBytes, "HmacSHA256");
     }
 
     public Long getExpiryMinutes() {
         return jwtExpiration/60000;
     }
-
 }
