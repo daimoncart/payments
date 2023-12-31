@@ -22,9 +22,11 @@ public class JwtDecoder {
     }
 
     public UserPrincipal convertJwtToPrincipal(DecodedJWT jwt) {
+        System.out.println();
+
         return UserPrincipal.builder()
                 .userId(Long.valueOf(jwt.getSubject()))
-                .email(jwt.getClaim("e").toString())
+                .email(String.valueOf(jwt.getClaim("email")))
                 .authorities(extractAuthoritiesFromClaim(jwt))
                 .build();
     }

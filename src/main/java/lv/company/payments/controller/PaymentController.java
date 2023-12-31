@@ -3,12 +3,15 @@ package lv.company.payments.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lv.company.payments.config.EmailConfig;
 import lv.company.payments.model.Beneficiary;
 import lv.company.payments.model.Payment;
 import lv.company.payments.security.UserPrincipal;
 import lv.company.payments.service.EmailService;
 import lv.company.payments.util.JwtUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
@@ -21,24 +24,24 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class PaymentController {
 
     private JwtUtil util;
     private EmailConfig emailConfig;
     private EmailService emailService;
 
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
+
     @PostMapping("/payments")
     @Operation(summary = "Send Payment", description = "Sends payment info to the authenticated user's email")
     public ResponseEntity<HttpStatus> postPayment(
-            @Valid @RequestBody Payment payment
-//            @RequestHeader("Authorization") String authHeader
+            @Valid @RequestBody Payment payment,
+            @AuthenticationPrincipal UserPrincipal principal
     ) {
-//        if (!isValidToken(authHeader)) {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or expired token");
-//        }
 
-        emailService.sendSimpleEmailMessage("imb_lial@yahoo.com", null);
+        // emailService.sendSimpleEmailMessage("imb_lial@yahoo.com", null);
+        logger.info("Entering payments controller");
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
@@ -47,12 +50,4 @@ public class PaymentController {
     public String testIt(@AuthenticationPrincipal UserPrincipal principal) {
         return "Hello this is working, " + principal.getEmail();
     }
-
-//    private boolean isValidToken(String authHeader) {
-//        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-//            return false;
-//        }
-//        String token = authHeader.substring(7);
-//        return !util.isTokenExpired(token); // TODO - see if JWT filter with proper Spring Security configuration
-//    }
 }

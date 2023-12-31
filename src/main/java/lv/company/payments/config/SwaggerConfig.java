@@ -46,3 +46,5 @@ public class SwaggerConfig {
                 .build();
     }
 }
+
+// TODO - fix Swagger configuration
