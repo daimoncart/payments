@@ -3,7 +3,10 @@ package lv.company.payments.util;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -11,18 +14,17 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
-@Component
+@Configuration
+@ConfigurationProperties("security.jwt")
+@Data
 public class JwtUtil {
-    @Value("${security.jwt.secret-key}")
     private String secretKey;
-
-    @Value("${security.jwt.expiration-time}")
-    private long jwtExpiration;
+    private long expirationTime;
 
     public String createJwtToken(String username) {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
-        long expMillis = nowMillis + jwtExpiration;
+        long expMillis = nowMillis + expirationTime;
         Date exp = new Date(expMillis);
 
         return Jwts.builder()
@@ -59,6 +61,6 @@ public class JwtUtil {
     }
 
     public Long getExpiryMinutes() {
-        return jwtExpiration/60000;
+        return expirationTime/60000;
     }
 }

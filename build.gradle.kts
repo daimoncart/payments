@@ -33,6 +33,7 @@ dependencies {
 	testImplementation("org.springframework.security:spring-security-test")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("io.jsonwebtoken:jjwt:0.12.3")
+	implementation("com.auth0:java-jwt:4.2.2")
 }
 
 tasks.withType<Test> {

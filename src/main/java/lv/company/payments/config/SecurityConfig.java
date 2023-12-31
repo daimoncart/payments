@@ -1,6 +1,8 @@
 package lv.company.payments.config;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lv.company.payments.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -15,10 +17,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final JwtTokenFilter jwtTokenFilter;
+//    private final JwtTokenFilter jwtTokenFilter;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 //    @Bean
 //    public WebSecurityCustomizer webSecurityCustomizer() {
 //        return (web) -> web.ignoring().requestMatchers("/authenticate", "/swagger-ui/**", "/v3/api-docs/**", "/payments/**"); // TODO - set up proper security configuration and remove payment endpoint from excluded list
@@ -26,6 +29,9 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
         http
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.disable())

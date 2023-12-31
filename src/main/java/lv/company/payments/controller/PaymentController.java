@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -38,6 +39,11 @@ public class PaymentController {
         emailService.sendSimpleEmailMessage("imb_lial@yahoo.com", null);
 
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @GetMapping("/test")
+    public String testIt() {
+        return "Hello this is working";
     }
 
     private boolean isValidToken(String authHeader) {
