@@ -16,12 +16,12 @@ public class JwtDecoder {
 
     private final JwtUtil util;
     public DecodedJWT decode(String token) {
-        return JWT.require(Algorithm.HMAC256(util.getSecretKey().toString()))
+        return JWT.require(Algorithm.HMAC256(util.getSecretKey()))
                 .build()
                 .verify(token);
     }
 
-    public UserPrincipal convert(DecodedJWT jwt) {
+    public UserPrincipal convertJwtToPrincipal(DecodedJWT jwt) {
         return UserPrincipal.builder()
                 .userId(Long.valueOf(jwt.getSubject()))
                 .email(jwt.getClaim("e").toString())

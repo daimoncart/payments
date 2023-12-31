@@ -29,6 +29,6 @@ public class JwtIssuer {
                 .withExpiresAt(exp)
                 .withClaim("e", email)
                 .withClaim("a", roles)
-                .sign(Algorithm.HMAC256(util.getSecretKey().toString()));
+                .sign(Algorithm.HMAC256(util.getSecretKey()));
     }
 }

@@ -35,9 +35,9 @@ public class AuthenticationController {
     public AuthResponse loginUser(@Valid @RequestBody AuthRequest request) { // TODO - work needed on error message for the wrong input
 
 //        String token = jwtUtil.createJwtToken(request.username());
-//        logger.info("Token generated for user: {}, expires in: {} minutes",
-//                request.username(),
-//                jwtUtil.getExpiryMinutes());
+        logger.info("Token generated for user: {}, expires in: {} minutes",
+                request.username(),
+                jwtUtil.getExpiryMinutes());
 
         var token = jwtIssuer.issue(1L, request.username(), List.of("USER"));
 

@@ -20,12 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-//    private final JwtTokenFilter jwtTokenFilter;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-//    @Bean
-//    public WebSecurityCustomizer webSecurityCustomizer() {
-//        return (web) -> web.ignoring().requestMatchers("/authenticate", "/swagger-ui/**", "/v3/api-docs/**", "/payments/**"); // TODO - set up proper security configuration and remove payment endpoint from excluded list
-//    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -44,16 +39,4 @@ public class SecurityConfig {
 
         return http.build();
     }
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http
-//                .csrf(csrf -> csrf.disable())
-//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .authorizeRequests()
-//                .anyRequest().authenticated()
-//                .and()
-//                .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
-//
-//        return http.build();
-//    }
 }

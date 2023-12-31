@@ -22,7 +22,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         extractTokenFromRequest(request)
                 .map(jwtDecoder::decode)
-                .map(jwtDecoder::convert)
+                .map(jwtDecoder::convertJwtToPrincipal)
                 .map(UserPrincipalAuthenticationToken::new)
                 .ifPresent(auth -> SecurityContextHolder.getContext().setAuthentication(auth));
         filterChain.doFilter(request, response);
