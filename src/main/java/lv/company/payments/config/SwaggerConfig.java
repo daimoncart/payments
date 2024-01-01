@@ -33,7 +33,7 @@ public class SwaggerConfig {
     public GroupedOpenApi publicApi() {
         return GroupedOpenApi.builder()
                 .group("Public")
-                .pathsToMatch("/login/**")
+                .pathsToMatch("/authenticate/**", "/swagger/**")
                 .build();
     }
 
@@ -41,10 +41,9 @@ public class SwaggerConfig {
     public GroupedOpenApi securedApi() {
         return GroupedOpenApi.builder()
                 .group("Secured")
-                .pathsToExclude("/login/**")
+                .pathsToExclude("/authenticate/**", "/swagger/**")
                 .pathsToMatch("/payments/**")
                 .build();
     }
-}
 
-// TODO - fix Swagger configuration
+}

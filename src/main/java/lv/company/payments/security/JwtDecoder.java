@@ -4,7 +4,6 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.RequiredArgsConstructor;
-import lv.company.payments.util.JwtUtil;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
@@ -14,15 +13,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JwtDecoder {
 
-    private final JwtUtil util;
+    private final JwtProperties jwtProperties;
     public DecodedJWT decode(String token) {
-        return JWT.require(Algorithm.HMAC256(util.getSecretKey()))
+        return JWT.require(Algorithm.HMAC256(jwtProperties.getSecretKey()))
                 .build()
                 .verify(token);
     }
 
     public UserPrincipal convertJwtToPrincipal(DecodedJWT jwt) {
-        System.out.println();
+        System.out.println(); // TODO - remove this later
 
         return UserPrincipal.builder()
                 .userId(Long.valueOf(jwt.getSubject()))

@@ -1,8 +1,6 @@
 package lv.company.payments.service.impl;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import lombok.val;
 import lv.company.payments.model.BankAccount;
 import lv.company.payments.service.BankAccountService;
 import org.springframework.stereotype.Service;
