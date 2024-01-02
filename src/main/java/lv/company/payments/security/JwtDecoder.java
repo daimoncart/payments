@@ -21,8 +21,6 @@ public class JwtDecoder {
     }
 
     public UserPrincipal convertJwtToPrincipal(DecodedJWT jwt) {
-        System.out.println(); // TODO - remove this later
-
         return UserPrincipal.builder()
                 .userId(Long.valueOf(jwt.getSubject()))
                 .email(String.valueOf(jwt.getClaim("email")))

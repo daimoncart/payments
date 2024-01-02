@@ -1,8 +1,11 @@
 package lv.company.payments.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import lv.company.payments.controller.AuthenticationController;
 import lv.company.payments.model.BankAccount;
 import lv.company.payments.service.BankAccountService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -13,9 +16,11 @@ import java.util.List;
 public class BankAccountServiceImpl implements BankAccountService {
 
     private final List<BankAccount> bankAccounts;
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
 
     @Override
     public boolean withdrawFunds(String email, BigDecimal amount) {
+        logger.info("Checking if withdrawal can be made");
         BankAccount account = findOrCreateAccount(email);
         return processWithdrawal(account, amount);
     }

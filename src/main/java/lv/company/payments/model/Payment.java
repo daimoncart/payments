@@ -1,6 +1,7 @@
 package lv.company.payments.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
@@ -21,9 +22,11 @@ public record Payment(
 
         @Schema(description = "Details of a payer")
         @NotNull
+        @Valid
         Payer payer,
 
         @Schema(description = "Details of a beneficiary")
         @NotNull
+        @Valid
         Beneficiary beneficiary
 ) {}

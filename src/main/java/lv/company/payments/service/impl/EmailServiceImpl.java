@@ -7,7 +7,6 @@ import lv.company.payments.service.EmailService;
 import lv.company.payments.util.PaymentEmailFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -33,7 +32,7 @@ public class EmailServiceImpl implements EmailService {
             message.setTo(to);
             message.setText(emailText);
             emailSender.send(message);
-            logger.info("Email with payment information sent.");
+            logger.info("Email with payment information sent");
 
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -43,6 +42,6 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendEmailMessageWithAttachedPdf(String to, Payment payment, boolean wasPaymentSuccessful) {
-        // TO BE IMPLEMENTED ONE DAY. PROBABLY NOT.
+        // TO BE IMPLEMENTED ONE DAY. OR NOT. CAN'T TELL RIGHT NOW.
     }
 }

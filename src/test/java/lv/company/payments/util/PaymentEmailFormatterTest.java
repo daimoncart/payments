@@ -1,7 +1,5 @@
 package lv.company.payments.util;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import lv.company.payments.model.Beneficiary;
 import lv.company.payments.model.Payer;
 import lv.company.payments.model.Payment;
@@ -9,11 +7,13 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class PaymentEmailFormatterTest {
 
     @Test
     public void testFormatPaymentEmailWhenSuccessful() {
-        Payer payer = new Payer("Henrihs", "Apse", null);
+        Payer payer = new Payer("Henrihs", "Apse", "user@example.com");
         Beneficiary beneficiary = new Beneficiary("Dana", "Apse", "LVxxPARX1234567890123");
         Payment payment = new Payment(new BigDecimal("100.00"), "Rent", payer, beneficiary);
 
@@ -29,7 +29,7 @@ public class PaymentEmailFormatterTest {
 
     @Test
     public void testFormatPaymentEmailWhenUnsuccessful() {
-        Payer payer = new Payer("Henrihs", "Apse", null);
+        Payer payer = new Payer("Henrihs", "Apse", "user@example.com");
         Beneficiary beneficiary = new Beneficiary("Šarlote", "Knaģe", "LVxxPARX1234567890123");
         Payment payment = new Payment(new BigDecimal("500.00"), "Rent", payer, beneficiary);
 

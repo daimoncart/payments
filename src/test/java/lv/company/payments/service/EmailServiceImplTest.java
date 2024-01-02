@@ -1,21 +1,23 @@
 package lv.company.payments.service;
 
-import static lv.company.payments.service.ServiceUtil.createPayment;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
 import lv.company.payments.config.EmailConfig;
-import lv.company.payments.model.Beneficiary;
-import lv.company.payments.model.Payer;
 import lv.company.payments.model.Payment;
 import lv.company.payments.service.impl.EmailServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.*;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
-import java.math.BigDecimal;
+import static lv.company.payments.service.ServiceUtil.createPayment;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class EmailServiceImplTest {
 

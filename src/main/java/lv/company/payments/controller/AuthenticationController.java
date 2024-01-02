@@ -10,12 +10,12 @@ import lv.company.payments.model.AuthRequest;
 import lv.company.payments.model.AuthResponse;
 import lv.company.payments.security.JwtIssuer;
 import lv.company.payments.security.JwtProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class AuthenticationController {
     @Operation(summary = "Login user", description = "Logs a user in and returns a token")
     @ApiResponse(responseCode = "200", description = "Successful login",
             content = @Content(mediaType = "text/plain", schema = @Schema(implementation = AuthResponse.class)))
-    public ResponseEntity<AuthResponse> loginUser(@Valid @RequestBody AuthRequest request) { // TODO - work needed on error message for the wrong input
+    public ResponseEntity<AuthResponse> loginUser(@Valid @RequestBody AuthRequest request) {
 
         logger.info("Entering authentication controller");
 
@@ -43,6 +43,8 @@ public class AuthenticationController {
         var response = AuthResponse.builder()
                 .authToken(token)
                 .build();
+
+        logger.info("Exiting authentication controller");
 
         return ResponseEntity.ok(response);
     }
